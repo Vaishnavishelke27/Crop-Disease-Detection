@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Disease Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <h1>Grape Leaf Disease Detector</h1>
+        <p>A deep learning-based tool for classifying grape leaf health.</p>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h2>Upload a Leaf Image</h2>
+            {% if error_message %}
+                <div class="alert alert-danger">{{ error_message }}</div>
+            {% endif %}
+
+            <div class="image-preview">
+                <img id="preview-image" src="#" alt="Image Preview" style="display: none;">
+                <span id="no-preview-text">Image Preview</span>
+            </div>
+            
+            <form action="/predict" method="post" enctype="multipart/form-data" id="upload-form">
+                <div class="file-input-wrapper">
+                    <label for="file-upload" class="upload-button">Choose File</label>
+                    <input id="file-upload" type="file" name="file" accept="image/*" required>
+                    <span class="file-name" id="file-name">No file chosen</span>
+                </div>
+                <button type="submit" class="predict-button">Upload and Predict</button>
+            </form>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <p>&copy; 2023 Crop Disease Detection. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('file-upload').addEventListener('change', function(e) {
+            const fileInput = e.target;
+            const fileNameDisplay = document.getElementById('file-name');
+            const previewImage = document.getElementById('preview-image');
+            const noPreviewText = document.getElementById('no-preview-text');
+            const form = document.getElementById('upload-form');
+
+            if (fileInput.files && fileInput.files[0]) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                    noPreviewText.style.display = 'none';
+                    fileNameDisplay.textContent = file.name;
+                };
+
+                reader.readAsDataURL(file);
+            } else {
+                previewImage.style.display = 'none';
+                noPreviewText.style.display = 'block';
+                fileNameDisplay.textContent = 'No file chosen';
+            }
+        });
+    </script>
+</body>
+</html>

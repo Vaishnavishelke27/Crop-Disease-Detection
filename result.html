@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <h1>Prediction Result</h1>
+    </header>
+    <div class="container">
+        <div class="card result-details-card">
+            <p class="prediction-info"><strong>Predicted Disease:</strong> <span class="predicted-class">{{ predicted_class.replace('_', ' ') }}</span></p>
+            <p class="prediction-info"><strong>Confidence:</strong> <span class="confidence">{{ confidence }}</span></p>
+
+            <div class="symptoms">
+                <h2>Key Symptoms</h2>
+                <ul>
+                    {% for symptom in symptoms %}
+                    <li>{{ symptom }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card image-display-card">
+            <div class="image-box">
+                <h3>Original Image</h3>
+                <img src="data:image/png;base64,{{ original_image }}" alt="Original Image" class="displayed-image">
+            </div>
+            {% if heatmap_image %}
+            <div class="image-box">
+                <h3>Model Focus (Grad-CAM)</h3>
+                <img src="data:image/png;base64,{{ heatmap_image }}" alt="Grad-CAM Heatmap" class="displayed-image">
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="action-buttons-container">
+        <a href="{{ url_for('index') }}" class="btn back-button">Upload Another Image</a>
+        <a href="{{ url_for('show_treatment', disease_name=predicted_class) }}" class="btn predict-button">View Treatment Recommendations</a>
+    </div>
+    
+    <footer class="footer">
+        <p>&copy; 2023 Crop Disease Detection. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

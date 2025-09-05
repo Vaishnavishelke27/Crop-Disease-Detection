@@ -1,0 +1,4 @@
+Black_rot
+Esca
+Leaf_blight
+Healthy

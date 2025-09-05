@@ -1,0 +1,274 @@
+/* General Body and Container Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5; /* Light gray background */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+}
+
+.header {
+    background-color: #4CAF50; /* Green header */
+    color: white;
+    padding: 2rem 1rem;
+    text-align: center;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.8em;
+    font-weight: 600;
+}
+
+.header p {
+    font-size: 1.1em;
+    margin-top: 0.5rem;
+    opacity: 0.9;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap; /* Allows sections to wrap on smaller screens */
+    gap: 2rem;
+    padding: 0 2rem;
+    max-width: 1200px; /* Max width for content */
+    width: 100%;
+    justify-content: center; /* Center items horizontally */
+    flex-grow: 1; /* Allows container to grow and push footer down */
+}
+
+.card {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    flex: 1; /* Allow cards to take equal space */
+    min-width: 300px; /* Minimum width before wrapping */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+h2 {
+    color: #2c3e50; /* Darker heading color */
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    font-size: 1.8em;
+    font-weight: 600;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 0.5rem;
+}
+
+/* Form and Input Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.file-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border: 2px dashed #a0a0a0;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: #fafafa;
+}
+
+input[type="file"] {
+    display: none; /* Hide default file input */
+}
+
+.upload-button {
+    background-color: #007bff; /* Blue button */
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.upload-button:hover {
+    background-color: #0056b3;
+}
+
+.file-name {
+    flex-grow: 1; /* Take remaining space */
+    color: #555;
+    font-style: italic;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.predict-button {
+    background-color: #28a745; /* Green predict button */
+    color: white;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.predict-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.predict-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Image Preview Styles (for index.html) */
+.image-preview {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    height: 250px; /* Fixed height for preview */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Hide overflow if image is too big initially */
+    background-color: #f8f8f8;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block; /* Remove extra space below image */
+    object-fit: contain; /* Ensure image fits without cropping */
+}
+
+#no-preview-text {
+    color: #888;
+    font-style: italic;
+}
+
+/* Results Section Styles */
+.results-content p {
+    font-size: 1.1em;
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+}
+
+.results-content strong {
+    color: #4CAF50; /* Green for labels */
+}
+
+.image-display-card {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.image-box {
+    text-align: center;
+}
+
+.image-box h3 {
+    color: #2c3e50;
+    font-size: 1.5em;
+    margin-bottom: 1rem;
+}
+
+.displayed-image {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* --- FIX FOR BUTTON OVERLAP --- */
+.action-buttons-container {
+    width: 100%;
+    margin-top: 2rem;
+    padding: 0 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem; /* Space between buttons */
+}
+
+.btn {
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: none;
+    text-align: center;
+    flex-grow: 1; /* Allow buttons to grow and fill space */
+    max-width: 300px;
+}
+
+.back-button {
+    background-color: #6c757d; /* Gray for secondary action */
+    color: white;
+}
+
+.back-button:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+/* --- END FIX --- */
+
+/* Footer Styles */
+.footer {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 3rem; /* Space above footer */
+    box-shadow: 0 -2px 8px rgba(47, 255, 36, 0.915);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .header p {
+        font-size: 1em;
+    }
+
+    .container {
+        flex-direction: column;
+        padding: 0 1rem;
+    }
+
+    .card {
+        margin-bottom: 1.5rem;
+    }
+
+    .predict-button {
+        font-size: 1em;
+        padding: 0.8rem 1.2rem;
+    }
+
+    .action-buttons-container {
+        flex-direction: column; /* Stack buttons on small screens */
+    }
+}
