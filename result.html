@@ -15,7 +15,13 @@
     </header>
     <div class="container">
         <div class="card result-details-card">
-            <p class="prediction-info"><strong>Predicted Disease:</strong> <span class="predicted-class">{{ predicted_class.replace('_', ' ') }}</span></p>
+            <h2>Prediction Summary</h2>
+            <p class="prediction-info"><strong>Predicted Condition:</strong> 
+                <span class="predicted-class 
+                    {% if predicted_class == 'Healthy' %}predicted-class-healthy{% endif %}">
+                    {{ predicted_class.replace('_', ' ') }}
+                </span>
+            </p>
             <p class="prediction-info"><strong>Confidence:</strong> <span class="confidence">{{ confidence }}</span></p>
 
             <div class="symptoms">
@@ -43,8 +49,8 @@
     </div>
 
     <div class="action-buttons-container">
+        <a href="{{ url_for('show_treatment', disease_name=predicted_class) }}" class="btn treatment-button">View Treatment</a>
         <a href="{{ url_for('index') }}" class="btn back-button">Upload Another Image</a>
-        <a href="{{ url_for('show_treatment', disease_name=predicted_class) }}" class="btn predict-button">View Treatment Recommendations</a>
     </div>
     
     <footer class="footer">

@@ -231,6 +231,16 @@ input[type="file"] {
     transform: translateY(-2px);
 }
 
+.treatment-button {
+    background-color: #ff9800; /* Orange for treatment action */
+    color: white;
+}
+
+.treatment-button:hover {
+    background-color: #e68900;
+    transform: translateY(-2px);
+}
+
 /* --- END FIX --- */
 
 /* Footer Styles */
