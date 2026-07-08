@@ -27,7 +27,7 @@
                 <span id="no-preview-text">Image Preview</span>
             </div>
             
-            <form action="/predict" method="post" enctype="multipart/form-data" id="upload-form">
+            <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data" id="upload-form">
                 <div class="file-input-wrapper">
                     <label for="file-upload" class="upload-button">Choose File</label>
                     <input id="file-upload" type="file" name="file" accept="image/*" required>
@@ -48,7 +48,6 @@
             const fileNameDisplay = document.getElementById('file-name');
             const previewImage = document.getElementById('preview-image');
             const noPreviewText = document.getElementById('no-preview-text');
-            const form = document.getElementById('upload-form');
 
             if (fileInput.files && fileInput.files[0]) {
                 const file = fileInput.files[0];

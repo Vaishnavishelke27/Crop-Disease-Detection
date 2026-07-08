@@ -1,4 +1,4 @@
-Black_rot
-Esca
-Leaf_blight
+Black Rot
+ESCA
 Healthy
+Leaf Blight

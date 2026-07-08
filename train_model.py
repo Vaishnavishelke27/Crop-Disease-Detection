@@ -9,11 +9,11 @@ import numpy as np
 # --- REQUIRED DEPENDENCIES ---
 # Run: pip install tensorflow keras numpy Pillow scikit-image scipy
 
-# --- CORRECTED PATHS FOR C:\Crop-Disease-Detection ---
-TRAIN_DIR = 'C:/Crop-Disease-Detection/dataset/train'
-VALIDATION_DIR = 'C:/Crop-Disease-Detection/dataset/validation'
-MODEL_SAVE_PATH = 'C:/Crop-Disease-Detection/your_model_files/plant_disease_model.h5'
-CLASS_NAMES_PATH = 'C:/Crop-Disease-Detection/your_model_files/class_names.txt'
+# --- RELATIVE PATHS ---
+TRAIN_DIR = 'dataset/train'
+VALIDATION_DIR = 'dataset/validation'
+MODEL_SAVE_PATH = 'your_model_files/plant_disease_model.h5'
+CLASS_NAMES_PATH = 'your_model_files/class_names.txt'
 
 # --- VERIFY PATHS BEFORE TRAINING ---
 if not os.path.exists(TRAIN_DIR):
@@ -81,12 +81,12 @@ if validation_generator.n == 0:
 base_model = MobileNetV2(input_shape=(224, 224, 3), include_top=False, weights='imagenet')
 base_model.trainable = False
 
-model = Sequential([
-    base_model,
-    GlobalAveragePooling2D(),
-    Dropout(0.5),
-    Dense(NUM_CLASSES, activation='softmax', name='classification_output')
-])
+# Build model using tf.keras.Model to avoid Sequential loading issues
+x = base_model.output
+x = GlobalAveragePooling2D()(x)
+x = Dropout(0.5)(x)
+outputs = Dense(NUM_CLASSES, activation='softmax', name='classification_output')(x)
+model = tf.keras.Model(inputs=base_model.input, outputs=outputs)
 
 model.compile(optimizer='adam',
               loss='categorical_crossentropy',
@@ -112,6 +112,13 @@ history_fine_tune = model.fit(
     initial_epoch=history.epoch[-1],
     validation_data=validation_generator
 )
+
+# Save class names after training to ensure consistency
+class_names_from_generator = list(train_generator.class_indices.keys())
+with open(CLASS_NAMES_PATH, 'w') as f:
+    for class_name in class_names_from_generator:
+        f.write(f"{class_name}\n")
+print(f"Class names saved to: {CLASS_NAMES_PATH}")
 
 os.makedirs(os.path.dirname(MODEL_SAVE_PATH), exist_ok=True)
 print(f"\nTraining complete. Saving model to: {MODEL_SAVE_PATH}")

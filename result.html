@@ -24,14 +24,7 @@
             </p>
             <p class="prediction-info"><strong>Confidence:</strong> <span class="confidence">{{ confidence }}</span></p>
 
-            <div class="symptoms">
-                <h2>Key Symptoms</h2>
-                <ul>
-                    {% for symptom in symptoms %}
-                    <li>{{ symptom }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
+
         </div>
         
         <div class="card image-display-card">
@@ -49,7 +42,6 @@
     </div>
 
     <div class="action-buttons-container">
-        <a href="{{ url_for('show_treatment', disease_name=predicted_class) }}" class="btn treatment-button">View Treatment</a>
         <a href="{{ url_for('index') }}" class="btn back-button">Upload Another Image</a>
     </div>
     
